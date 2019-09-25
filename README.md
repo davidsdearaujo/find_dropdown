@@ -1,7 +1,12 @@
 # DropDown package - [[ver em português](/README-PT.md)]
 
 Simple and robust Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
+<center>
+
 ![](https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/Screenshot_4.png?raw=true)
+</center>
+<img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Endpoint.gif?raw=true" width="49.5%"/>
+<img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%"/>
 
 
 ## packages.yaml
@@ -15,7 +20,6 @@ import 'package:drop_down/drop_down.dart';
 ```
 
 ## Simple implementation
-<div style="width:75%">
 
 ```dart
 DropDown(
@@ -25,7 +29,6 @@ DropDown(
   selectedItem: "Brasil",
 );
 ```
-</div><div style="width:25%"><img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/Screenshot_2.png?raw=true"/></div>
 
 
 ## Endpoint implementation (using [Dio package](https://pub.dev/packages/dio))
@@ -56,3 +59,5 @@ To **customize the items**, we have the `dropdownItemBuilder` property, which ta
 - `BuildContext context`: current context;
 - `T item`: Current item, where **T** is the type passed in the DropDown constructor.
 - `bool isSelected`: Boolean that tells you if the current item is selected.
+
+# [View more Examples](https://github.com/davidsdearaujo/drop_down/tree/master/example)
