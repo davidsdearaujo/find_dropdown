@@ -17,3 +17,7 @@
 ## [0.1.4] - 2019.09.25
 
 * Updated README.md
+
+## [0.1.4+1] - 2019.09.25
+
+* Formatted file find_dropdown.dart
