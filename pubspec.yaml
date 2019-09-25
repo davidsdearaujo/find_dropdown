@@ -10,6 +10,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  rxdart: ^0.22.2
   select_dialog: ^1.0.0+4
   flutter:
     sdk: flutter
