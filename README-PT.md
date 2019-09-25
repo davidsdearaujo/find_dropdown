@@ -9,7 +9,7 @@ Simples e robusto FindDropdown com recurso de busca entre os itens, possibilitan
 
 ## packages.yaml
 ```yaml
-find_FindDropdown: <lastest version>
+find_dropdown: <lastest version>
 ```
 
 ## Import

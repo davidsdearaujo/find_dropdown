@@ -9,7 +9,7 @@ Simple and robust FindDropdown with item search feature, making it possible to u
 
 ## packages.yaml
 ```yaml
-find_FindDropdown: <lastest version>
+find_dropdown: <lastest version>
 ```
 
 ## Import
