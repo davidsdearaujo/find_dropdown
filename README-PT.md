@@ -23,7 +23,7 @@ DropDown(
 );
 ```
 
-## Implementação com endpoint
+## Implementação com endpoint (utilizando o [package Dio](https://pub.dev/packages/dio))
 ```dart
 DropDown<UserModel>(
   label: "Nome",
