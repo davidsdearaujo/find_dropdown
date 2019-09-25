@@ -1,4 +1,4 @@
-# drop_down package
+# DropDown package - [[ver e português]()]
 
 Simple and robust Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
 
@@ -18,7 +18,7 @@ import 'package:drop_down/drop_down.dart';
 DropDown(
   items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
   label: "País",
-  onChanged: print,
+  onChanged: (String item) => print(item),
   selectedItem: "Brasil",
 );
 ```
@@ -41,25 +41,13 @@ DropDown<UserModel>(
 );
 ```
 ## Customization
-You can customize the layout of the dropdown and its items. [EXAMPLE]
+You can customize the layout of the dropdown and its items. [EXAMPLE](https://github.com/davidsdearaujo/drop_down/tree/master/example#custom-layout-endpoint-example)
 
-To customize the dropdown, we have the `dropdownBuilder` property, which takes a function with the parameters:
-    - `BuildContext context`: current context;
-    - `T item`: Current item, where **T** is the type passed in the DropDown constructor.
+To **customize the dropdown**, we have the `dropdownBuilder` property, which takes a function with the parameters:
+- `BuildContext context`: current context;
+- `T item`: Current item, where **T** is the type passed in the DropDown constructor.
 
-To customize the items, we have the `dropdownItemBuilder` property, which takes a function with the parameters:
-    - `BuildContext context`: current context;
-    - `T item`: Current item, where **T** is the type passed in the DropDown constructor.
-    - `bool isSelected`: Boolean that tells you if the current item is selected.
-
-
-## Getting Started
-
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+To **customize the items**, we have the `dropdownItemBuilder` property, which takes a function with the parameters:
+- `BuildContext context`: current context;
+- `T item`: Current item, where **T** is the type passed in the DropDown constructor.
+- `bool isSelected`: Boolean that tells you if the current item is selected.

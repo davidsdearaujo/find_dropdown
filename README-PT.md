@@ -1,4 +1,4 @@
-# drop_down package
+# DropDown package - [[view english]()]
 
 Simples e robusto Dropdown com recurso de busca entre os itens, possibilitando utilizar uma lista de itens offline ou uma URL para filtragem, com fácil customização.
 
@@ -18,7 +18,7 @@ import 'package:drop_down/drop_down.dart';
 DropDown(
   items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
   label: "País",
-  onChanged: print,
+  onChanged: (String item) => print(item),
   selectedItem: "Brasil",
 );
 ```
@@ -43,11 +43,11 @@ DropDown<UserModel>(
 ## Customização
 É possível customizar o layout do dropdown e de seus itens. [EXAMPLE]
 
-Para customizar o dropdown, temos a propriedade `dropdownBuilder`, que recebe uma função com os parâmetros:
-    - `BuildContext context`: Contexto do item atual;
-    - `T item`: Item atual, onde **T** é o tipo passado no construtor do DropDown.
+Para **customizar o dropdown**, temos a propriedade `dropdownBuilder`, que recebe uma função com os parâmetros:
+- `BuildContext context`: Contexto do item atual;
+- `T item`: Item atual, onde **T** é o tipo passado no construtor do DropDown.
 
-Para customizar os itens, temos a propriedade `dropdownItemBuilder`, que recebe uma função com os parâmetros:
-    - `BuildContext context`: Contexto do item atual;
-    - `T item`: Item atual, onde **T** é o tipo passado no construtor do DropDown.
-    - `bool isSelected`: Boolean que informa se o item atual está selecionado.
+Para **customizar os itens**, temos a propriedade `dropdownItemBuilder`, que recebe uma função com os parâmetros:
+- `BuildContext context`: Contexto do item atual;
+- `T item`: Item atual, onde **T** é o tipo passado no construtor do DropDown.
+- `bool isSelected`: Boolean que informa se o item atual está selecionado.
