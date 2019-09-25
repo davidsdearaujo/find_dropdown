@@ -29,7 +29,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.onFind,
     this.dropdownBuilder,
     this.dropdownItemBuilder,
-  }) : assert(onChanged != null),
+  })  : assert(onChanged != null),
         super(key: key);
   @override
   _FindDropdownState<T> createState() => _FindDropdownState<T>();
