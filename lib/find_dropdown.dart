@@ -1,25 +1,25 @@
-library drop_down;
+library find_dropdown;
 
 import 'package:select_dialog/select_dialog.dart';
 import 'package:flutter/material.dart';
 
-import 'drop_down_bloc.dart';
+import 'find_dropdown_bloc.dart';
 
-typedef Widget DropDownBuilderType<T>(BuildContext context, T selectedText);
-typedef Widget DropDownItemBuilderType<T>(
+typedef Widget FindDropdownBuilderType<T>(BuildContext context, T selectedText);
+typedef Widget FindDropdownItemBuilderType<T>(
     BuildContext context, T item, bool isSelected);
 
-class DropDown<T> extends StatefulWidget {
+class FindDropdown<T> extends StatefulWidget {
   final String label;
   final TextStyle labelStyle;
   final List<T> items;
   final T selectedItem;
   final Future<List<T>> Function(String text) onFind;
   final void Function(T selectedItem) onChanged;
-  final DropDownBuilderType<T> dropdownBuilder;
-  final DropDownItemBuilderType<T> dropdownItemBuilder;
+  final FindDropdownBuilderType<T> dropdownBuilder;
+  final FindDropdownItemBuilderType<T> dropdownItemBuilder;
 
-  const DropDown({
+  const FindDropdown({
     Key key,
     @required this.onChanged,
     this.label,
@@ -32,16 +32,16 @@ class DropDown<T> extends StatefulWidget {
   }) : assert(onChanged != null),
         super(key: key);
   @override
-  _DropDownState<T> createState() => _DropDownState<T>();
+  _FindDropdownState<T> createState() => _FindDropdownState<T>();
 }
 
-class _DropDownState<T> extends State<DropDown<T>> {
-  DropDownBloc<T> bloc;
+class _FindDropdownState<T> extends State<FindDropdown<T>> {
+  FindDropdownBloc<T> bloc;
 
   @override
   void initState() {
     super.initState();
-    bloc = DropDownBloc<T>(seedValue: widget.selectedItem);
+    bloc = FindDropdownBloc<T>(seedValue: widget.selectedItem);
   }
 
   @override

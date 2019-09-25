@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:drop_down/drop_down.dart';
+import 'package:find_dropdown/find_dropdown.dart';
 
 import 'user_model.dart';
 
@@ -28,19 +28,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("DropDown Example")),
+      appBar: AppBar(title: Text("FindDropdown Example")),
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
           children: <Widget>[
-            DropDown(
+            FindDropdown(
               items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
               label: "País",
               onChanged: print,
               selectedItem: "Brasil",
             ),
             SizedBox(height: 15),
-            DropDown<UserModel>(
+            FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
               onChanged: (UserModel data) {
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             SizedBox(height: 15),
-            DropDown<UserModel>(
+            FindDropdown<UserModel>(
               label: "Personagem",
               onFind: (String filter) => getData(filter),
               onChanged: (UserModel data) {

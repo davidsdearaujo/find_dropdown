@@ -1,10 +1,10 @@
-name: drop_down
-description: Simple and robust Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
+name: find_dropdown
+description: Simple and robust FindDropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
 version: 0.1.0
 author: Flutterando Team <david@flutterando.com.br>
 homepage: https://flutterando.com.br/
-git: https://github.com/davidsdearaujo/drop_down
-repository: https://github.com/davidsdearaujo/drop_down
+git: https://github.com/davidsdearaujo/find_FindDropdown
+repository: https://github.com/davidsdearaujo/find_FindDropdown
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

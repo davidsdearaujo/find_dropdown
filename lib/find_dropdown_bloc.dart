@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
-class DropDownBloc<T>{
+class FindDropdownBloc<T>{
   final textController = TextEditingController();
   final selected$ = BehaviorSubject<T>();
 
-  DropDownBloc({T seedValue}){
+  FindDropdownBloc({T seedValue}){
     selected$.add(seedValue);
   }
 
