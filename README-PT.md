@@ -1,4 +1,4 @@
-# DropDown package - [[view english]()]
+# DropDown package - [[view english](/README.md)]
 
 Simples e robusto Dropdown com recurso de busca entre os itens, possibilitando utilizar uma lista de itens offline ou uma URL para filtragem, com fácil customização.
 
