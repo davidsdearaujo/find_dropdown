@@ -1,12 +1,10 @@
 # DropDown package - [[view english](/README.md)]
 
 Simples e robusto Dropdown com recurso de busca entre os itens, possibilitando utilizar uma lista de itens offline ou uma URL para filtragem, com fácil customização.
-<center>
 
 ![](https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/Screenshot_4.png?raw=true)
-</center>
-<img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Endpoint.gif?raw=true" width="49.5%"/>
-<img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%"/>
+
+<img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Endpoint.gif?raw=true" width="49.5%" /> <img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%" />
 
 
 ## packages.yaml
