@@ -1,4 +1,4 @@
-# FindFindDropdown package - [[ver em português](https://github.com/davidsdearaujo/find_dropdown/blob/master/README-PT.md)]
+# FindDropdown package - [[ver em português](https://github.com/davidsdearaujo/find_dropdown/blob/master/README-PT.md)]
 
 Simple and robust FindDropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
 
