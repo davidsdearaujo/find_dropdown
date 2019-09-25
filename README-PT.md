@@ -1,3 +1,5 @@
+[![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-yellow.svg)](https://www.buymeacoffee.com/deivao)
+
 # FindDropdown package - [[view english](https://github.com/davidsdearaujo/find_dropdown/blob/master/README.md)]
 
 Simples e robusto FindDropdown com recurso de busca entre os itens, possibilitando utilizar uma lista de itens offline ou uma URL para filtragem, com fácil customização.
