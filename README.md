@@ -1,4 +1,4 @@
-# DropDown package - [[ver e português]()]
+# DropDown package - [[ver em português](/README-PT.md)]
 
 Simple and robust Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
 
