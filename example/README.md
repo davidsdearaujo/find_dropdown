@@ -1,5 +1,3 @@
-# example
-
 ## Simple Example
 ```dart
 DropDown(

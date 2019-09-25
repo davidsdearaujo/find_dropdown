@@ -1,6 +1,7 @@
 # DropDown package - [[ver em português](/README-PT.md)]
 
 Simple and robust Dropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
+![](https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/Screenshot_4.png?raw=true)
 
 
 ## packages.yaml
@@ -14,6 +15,8 @@ import 'package:drop_down/drop_down.dart';
 ```
 
 ## Simple implementation
+<div style="width:75%">
+
 ```dart
 DropDown(
   items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
@@ -22,6 +25,8 @@ DropDown(
   selectedItem: "Brasil",
 );
 ```
+</div><div style="width:25%"><img src="https://github.com/davidsdearaujo/drop_down/blob/master/screenshots/Screenshot_2.png?raw=true"/></div>
+
 
 ## Endpoint implementation (using [Dio package](https://pub.dev/packages/dio))
 ```dart
