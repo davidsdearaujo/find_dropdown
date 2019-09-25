@@ -13,3 +13,7 @@
 ## [0.1.3] - 2019.09.25
 
 * Updated README.md
+
+## [0.1.4] - 2019.09.25
+
+* Updated README.md
