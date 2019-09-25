@@ -46,7 +46,7 @@ FindDropdown<UserModel>(
   },
 );
 ```
-## Customização
+## Customização de layout
 É possível customizar o layout do FindDropdown e de seus itens. [EXAMPLE]
 
 Para **customizar o FindDropdown**, temos a propriedade `dropdownBuilder`, que recebe uma função com os parâmetros:
@@ -57,5 +57,30 @@ Para **customizar os itens**, temos a propriedade `dropdownItemBuilder`, que rec
 - `BuildContext context`: Contexto do item atual;
 - `T item`: Item atual, onde **T** é o tipo passado no construtor do FindDropdown.
 - `bool isSelected`: Boolean que informa se o item atual está selecionado.
+
+# Atenção
+Para usar um modelo como item no dropdown, é necessário implementar os métodos **toString**, **equals** e **hashcode**, conforme mostrado abaixo:
+
+```dart
+class UserModel {
+  final String id;
+  final DateTime createdAt;
+  final String name;
+  final String avatar;
+
+  UserModel({this.id, this.createdAt, this.name, this.avatar});
+
+  @override
+  String toString() => name;
+
+  @override
+  operator ==(o) => o is UserModel && o.id == id;
+
+  @override
+  int get hashCode => id.hashCode^name.hashCode^createdAt.hashCode;
+
+}
+```
+
 
 # [Ver mais Exemplos](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)

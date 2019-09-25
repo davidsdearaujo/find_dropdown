@@ -48,7 +48,7 @@ FindDropdown<UserModel>(
   },
 );
 ```
-## Customization
+## Layout customization
 You can customize the layout of the FindDropdown and its items. [EXAMPLE](https://github.com/davidsdearaujo/find_dropdown/tree/master/example#custom-layout-endpoint-example)
 
 To **customize the FindDropdown**, we have the `dropdownBuilder` property, which takes a function with the parameters:
@@ -59,5 +59,29 @@ To **customize the items**, we have the `dropdownItemBuilder` property, which ta
 - `BuildContext context`: current context;
 - `T item`: Current item, where **T** is the type passed in the FindDropdown constructor.
 - `bool isSelected`: Boolean that tells you if the current item is selected.
+
+# Attention
+To use a template as an item type, you need to implement **toString**, **equals** and **hashcode**, as shown below:
+
+```dart
+class UserModel {
+  final String id;
+  final DateTime createdAt;
+  final String name;
+  final String avatar;
+
+  UserModel({this.id, this.createdAt, this.name, this.avatar});
+
+  @override
+  String toString() => name;
+
+  @override
+  operator ==(o) => o is UserModel && o.id == id;
+
+  @override
+  int get hashCode => id.hashCode^name.hashCode^createdAt.hashCode;
+
+}
+```
 
 # [View more Examples](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
