@@ -6,7 +6,7 @@ Simples e robusto FindDropdown com recurso de busca entre os itens, possibilitan
 
 ![](https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/Screenshot_4.png?raw=true)
 
-<img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Endpoint.gif?raw=true" width="49.5%" /> <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%" />
+<img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Simple.gif?raw=true" width="49.5%" /> <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%" />
 
 
 ## packages.yaml
