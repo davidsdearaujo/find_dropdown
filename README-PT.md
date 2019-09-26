@@ -29,6 +29,24 @@ FindDropdown(
 );
 ```
 
+## Validação
+```dart
+FindDropdown(
+  items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+  label: "País",
+  onChanged: (String item) => print(item),
+  selectedItem: "Brasil",
+  validate: (String item) {
+    if (item == null)
+      return "Campo obrigatório";
+    else if (item == "Brasil")
+      return "Item inválido";
+    else
+      return null; //retorno null para "sem erro"
+  },
+);
+```
+
 ## Implementação com endpoint (utilizando o [package Dio](https://pub.dev/packages/dio))
 ```dart
 FindDropdown<UserModel>(
@@ -47,7 +65,7 @@ FindDropdown<UserModel>(
 );
 ```
 ## Customização de layout
-É possível customizar o layout do FindDropdown e de seus itens. [EXAMPLE]
+É possível customizar o layout do FindDropdown e de seus itens. [EXEMPLO](https://github.com/davidsdearaujo/find_dropdown/tree/master/example#custom-layout-endpoint-example)
 
 Para **customizar o FindDropdown**, temos a propriedade `dropdownBuilder`, que recebe uma função com os parâmetros:
 - `BuildContext context`: Contexto do item atual;

@@ -30,6 +30,24 @@ FindDropdown(
 );
 ```
 
+## Validation
+```dart
+FindDropdown(
+  items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+  label: "País",
+  onChanged: (String item) => print(item),
+  selectedItem: "Brasil",
+  validate: (String item) {
+    if (item == null)
+      return "Required field";
+    else if (item == "Brasil")
+      return "Invalid item";
+    else
+      return null; //return null to "no error"
+  },
+);
+```
+
 
 ## Endpoint implementation (using [Dio package](https://pub.dev/packages/dio))
 ```dart

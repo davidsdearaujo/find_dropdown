@@ -10,6 +10,25 @@ FindDropdown(
 
 <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Simple.gif?raw=true" width="49.5%"/> <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/Screenshot_1.png?raw=true" width="49.5%"/>
 
+## Validation Example
+```dart
+FindDropdown(
+  items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+  label: "País",
+  onChanged: print,
+  selectedItem: "Brasil",
+  validate: (String item) {
+    if (item == null)
+      return "Required field";
+    else if (item == "Brasil")
+      return "Invalid item";
+    else
+      return null;
+  },
+),
+```
+![](https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/Screenshot_5.png?raw=true)
+
 ## Online Endpoint Example
 ```dart
 FindDropdown<UserModel>(
