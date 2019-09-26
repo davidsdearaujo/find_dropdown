@@ -38,8 +38,15 @@ class _MyHomePageState extends State<MyHomePage> {
               label: "País",
               onChanged: print,
               selectedItem: "Brasil",
+              validate: (String item) {
+                if (item == null)
+                  return "Required field";
+                else if (item == "Brasil")
+                  return "Invalid item";
+                else
+                  return null;
+              },
             ),
-            SizedBox(height: 15),
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
@@ -47,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 print(data);
               },
             ),
-            SizedBox(height: 15),
             FindDropdown<UserModel>(
               label: "Personagem",
               onFind: (String filter) => getData(filter),
@@ -75,12 +81,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                 );
               },
-              dropdownItemBuilder: (BuildContext context, UserModel item, bool isSelected) {
+              dropdownItemBuilder:
+                  (BuildContext context, UserModel item, bool isSelected) {
                 return Container(
                   decoration: !isSelected
                       ? null
                       : BoxDecoration(
-                          border: Border.all(color: Theme.of(context).primaryColor),
+                          border:
+                              Border.all(color: Theme.of(context).primaryColor),
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white,
                         ),
