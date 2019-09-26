@@ -21,3 +21,7 @@
 ## [0.1.4+1] - 2019.09.25
 
 * Formatted file find_dropdown.dart
+
+## [0.1.5] - 2019.09.25
+
+* Added parameter "validate"
