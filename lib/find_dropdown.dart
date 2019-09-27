@@ -96,6 +96,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       ? widget.dropdownBuilder(context, snapshot.data)
                       : Container(
                           padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                          height: 60,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
@@ -110,10 +111,24 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                               Text(snapshot.data?.toString() ?? ""),
                               Align(
                                 alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 25,
-                                  color: Colors.black54,
+                                child: Row(
+                                  children: <Widget>[
+                                    snapshot.data != null
+                                        ? IconButton(
+                                            onPressed: () {
+                                              bloc.selected$.add(null);
+                                              widget.onChanged(null);
+                                            },
+                                            icon: Icon(Icons.clear),
+                                            iconSize: 25,
+                                          )
+                                        : Container(),
+                                    Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 25,
+                                      color: Colors.black54,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
