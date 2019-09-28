@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: "País",
               onChanged: print,
               selectedItem: "Brasil",
+              showSearchBox: false,
               validate: (String item) {
                 if (item == null)
                   return "Required field";
@@ -50,9 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
-              onChanged: (UserModel data) {
-                print(data);
-              },
+              searchBoxDecoration: InputDecoration(
+                hintText: "Search",
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (UserModel data) => print(data),
             ),
             FindDropdown<UserModel>(
               label: "Personagem",
