@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: "País",
               onChanged: print,
               selectedItem: "Brasil",
+              showSearchBox: false,
               validate: (String item) {
                 if (item == null)
                   return "Required field";

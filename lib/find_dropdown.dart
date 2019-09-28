@@ -10,11 +10,15 @@ typedef void FindDropdownChangedType<T>(T selectedItem);
 typedef Widget FindDropdownBuilderType<T>(BuildContext context, T selectedText);
 typedef String FindDropdownValidationType<T>(T selectedText);
 typedef Widget FindDropdownItemBuilderType<T>(
-    BuildContext context, T item, bool isSelected);
+  BuildContext context,
+  T item,
+  bool isSelected,
+);
 
 class FindDropdown<T> extends StatefulWidget {
   final String label;
   final bool showSearchBox;
+  final bool showClearButton;
   final TextStyle labelStyle;
   final List<T> items;
   final T selectedItem;
@@ -28,13 +32,14 @@ class FindDropdown<T> extends StatefulWidget {
     Key key,
     @required this.onChanged,
     this.label,
-    this.showSearchBox,
     this.labelStyle,
     this.items,
     this.selectedItem,
     this.onFind,
     this.dropdownBuilder,
     this.dropdownItemBuilder,
+    this.showSearchBox = true,
+    this.showClearButton = false,
     this.validate,
   })  : assert(onChanged != null),
         super(key: key);
@@ -88,18 +93,18 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       onFind: widget.onFind,
                       showSearchBox: widget.showSearchBox,
                       itemBuilder: widget.dropdownItemBuilder,
+                      selectedValue: snapshot.data,
                       onChange: (item) {
                         bloc.selected$.add(item);
                         widget.onChanged(item);
                       },
-                      selectedValue: snapshot.data,
                     );
                   },
                   child: (widget.dropdownBuilder != null)
                       ? widget.dropdownBuilder(context, snapshot.data)
                       : Container(
                           padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
-                          height: 60,
+                          height: 40,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
@@ -116,16 +121,16 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                                 alignment: Alignment.centerRight,
                                 child: Row(
                                   children: <Widget>[
-                                    snapshot.data != null
-                                        ? IconButton(
-                                            onPressed: () {
-                                              bloc.selected$.add(null);
-                                              widget.onChanged(null);
-                                            },
-                                            icon: Icon(Icons.clear),
-                                            iconSize: 25,
-                                          )
-                                        : Container(),
+                                    if (snapshot.data != null &&
+                                        widget.showClearButton)
+                                      IconButton(
+                                        onPressed: () {
+                                          bloc.selected$.add(null);
+                                          widget.onChanged(null);
+                                        },
+                                        icon: Icon(Icons.clear),
+                                        iconSize: 25,
+                                      ),
                                     Icon(
                                       Icons.arrow_drop_down,
                                       size: 25,
