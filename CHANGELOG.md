@@ -2,6 +2,7 @@
 
 * Added show or hide searchbox capability
 * Added clear feature
+* Added searchBoxDecoration property
 
 ## [0.1.5+1] - 2019.09.26
 

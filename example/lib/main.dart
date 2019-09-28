@@ -51,9 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
-              onChanged: (UserModel data) {
-                print(data);
-              },
+              searchBoxDecoration: InputDecoration(
+                hintText: "Search",
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (UserModel data) => print(data),
             ),
             FindDropdown<UserModel>(
               label: "Personagem",
