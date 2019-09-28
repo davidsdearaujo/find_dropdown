@@ -14,6 +14,7 @@ typedef Widget FindDropdownItemBuilderType<T>(
 
 class FindDropdown<T> extends StatefulWidget {
   final String label;
+  final bool showSearchBox;
   final TextStyle labelStyle;
   final List<T> items;
   final T selectedItem;
@@ -27,6 +28,7 @@ class FindDropdown<T> extends StatefulWidget {
     Key key,
     @required this.onChanged,
     this.label,
+    this.showSearchBox,
     this.labelStyle,
     this.items,
     this.selectedItem,
@@ -84,6 +86,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       items: widget.items,
                       label: widget.label,
                       onFind: widget.onFind,
+                      showSearchBox: showSearchBox,
                       itemBuilder: widget.dropdownItemBuilder,
                       onChange: (item) {
                         bloc.selected$.add(item);
