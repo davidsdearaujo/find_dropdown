@@ -86,7 +86,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       items: widget.items,
                       label: widget.label,
                       onFind: widget.onFind,
-                      showSearchBox: showSearchBox,
+                      showSearchBox: widget.showSearchBox,
                       itemBuilder: widget.dropdownItemBuilder,
                       onChange: (item) {
                         bloc.selected$.add(item);
