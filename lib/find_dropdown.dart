@@ -126,19 +126,28 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                                   children: <Widget>[
                                     if (snapshot.data != null &&
                                         widget.showClearButton)
-                                      IconButton(
-                                        onPressed: () {
+                                      GestureDetector(
+                                        onTap: () {
                                           bloc.selected$.add(null);
                                           widget.onChanged(null);
                                         },
-                                        icon: Icon(Icons.clear),
-                                        iconSize: 25,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 0),
+                                          child: Icon(
+                                            Icons.clear,
+                                            size: 25,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
                                       ),
-                                    Icon(
-                                      Icons.arrow_drop_down,
-                                      size: 25,
-                                      color: Colors.black54,
-                                    ),
+                                    if (snapshot.data == null ||
+                                        !widget.showClearButton)
+                                      Icon(
+                                        Icons.arrow_drop_down,
+                                        size: 25,
+                                        color: Colors.black54,
+                                      ),
                                   ],
                                 ),
                               ),

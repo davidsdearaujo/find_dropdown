@@ -1,3 +1,6 @@
+## [0.1.6+1] - 2019.10.02
+ * Updated clear button
+
 ## [0.1.6] - 2019.09.27
 
 * Added show or hide searchbox capability
