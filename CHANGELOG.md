@@ -1,5 +1,10 @@
+## [0.1.7+1] - 2019.10.02
+ * Updated bottom distance
+
+
 ## [0.1.7] - 2019.10.02
  * Updated clear button
+
 
 ## [0.1.6] - 2019.09.27
 

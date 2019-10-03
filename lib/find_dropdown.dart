@@ -157,24 +157,25 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                 );
               },
             ),
-            StreamBuilder<String>(
-              stream: bloc.validateMessageOut,
-              builder: (context, snapshot) {
-                return ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: 15),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                      snapshot.data ?? "",
-                      style: Theme.of(context).textTheme.body1.copyWith(
-                          color: snapshot.hasData
-                              ? Theme.of(context).errorColor
-                              : Colors.transparent),
+            if (widget.validate != null)
+              StreamBuilder<String>(
+                stream: bloc.validateMessageOut,
+                builder: (context, snapshot) {
+                  return ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: 15),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        snapshot.data ?? "",
+                        style: Theme.of(context).textTheme.body1.copyWith(
+                            color: snapshot.hasData
+                                ? Theme.of(context).errorColor
+                                : Colors.transparent),
+                      ),
                     ),
-                  ),
-                );
-              },
-            )
+                  );
+                },
+              )
           ],
         ),
       ],
