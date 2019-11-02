@@ -39,6 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: print,
               selectedItem: "Brasil",
               showSearchBox: false,
+              labelStyle: TextStyle(color: Colors.redAccent),
+              backgroundColor: Colors.redAccent,
+              titleStyle:TextStyle(color: Colors.greenAccent),
               validate: (String item) {
                 if (item == null)
                   return "Required field";

@@ -28,6 +28,8 @@ class FindDropdown<T> extends StatefulWidget {
   final FindDropdownItemBuilderType<T> dropdownItemBuilder;
   final FindDropdownValidationType<T> validate;
   final InputDecoration searchBoxDecoration;
+  final Color backgroundColor;
+  final TextStyle titleStyle;
 
   const FindDropdown({
     Key key,
@@ -43,6 +45,8 @@ class FindDropdown<T> extends StatefulWidget {
     this.showClearButton = false,
     this.validate,
     this.searchBoxDecoration,
+    this.backgroundColor,
+    this.titleStyle,
   })  : assert(onChanged != null),
         super(key: key);
   @override
@@ -97,6 +101,8 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       itemBuilder: widget.dropdownItemBuilder,
                       selectedValue: snapshot.data,
                       searchBoxDecoration: widget.searchBoxDecoration,
+                      backgroundColor: widget.backgroundColor,
+                      titleStyle: widget.titleStyle,
                       onChange: (item) {
                         bloc.selected$.add(item);
                         widget.onChanged(item);
