@@ -112,9 +112,11 @@ packages:
   select_dialog:
     dependency: transitive
     description:
-      name: select_dialog
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "1c6d7e6f36d5335b1911a5523fed8e85c750129d"
+      url: "https://github.com/Bwolfs2/select_dialog.git"
+    source: git
     version: "1.0.6+1"
   sky_engine:
     dependency: transitive
