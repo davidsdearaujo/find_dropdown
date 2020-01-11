@@ -6,7 +6,7 @@ class FindDropdownBloc<T> {
   final selected$ = BehaviorSubject<T>();
   final _validateMessage$ = BehaviorSubject<String>();
 
-  Observable<String> get validateMessageOut => _validateMessage$;
+  Stream<String> get validateMessageOut => _validateMessage$;
 
   FindDropdownBloc({
     T seedValue,
