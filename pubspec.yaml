@@ -14,7 +14,7 @@ dependencies:
   #select_dialog: ^1.0.6+1
   select_dialog: 
     git:
-      url: https://github.com/Bwolfs2/select_dialog.git
+      url: https://github.com/davidsdearaujo/select_dialog.git
   flutter:
     sdk: flutter
 
