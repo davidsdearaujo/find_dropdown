@@ -8,6 +8,9 @@ Simples e robusto FindDropdown com recurso de busca entre os itens, possibilitan
 
 <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Simple.gif?raw=true" width="49.5%" /> <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%" />
 
+## ATENÇÃO
+Se você utiliza o rxdart em seu projeto em uma versão inferior a 0.23.x, utilize a versão `0.1.7+1` desse package.
+Caso contrário, pode utilizar a versão mais atual!
 
 ## packages.yaml
 ```yaml
