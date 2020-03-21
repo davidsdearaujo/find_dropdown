@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
               backgroundColor: Colors.redAccent,
-              titleStyle:TextStyle(color: Colors.greenAccent),
+              dialogTitleStyle:TextStyle(color: Colors.greenAccent),
               validate: (String item) {
                 if (item == null)
                   return "Required field";
@@ -60,6 +60,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onChanged: (UserModel data) => print(data),
             ),
+
+            FindDropdown<UserModel>(
+              label: "Label",
+              dialogTitle: "Title dialog",
+              dropdownBuilderHeight: 70,
+              onFind: (String filter) => getData(filter),
+              searchBoxDecoration: InputDecoration(
+                hintText: "Search",
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (UserModel data) => print(data),
+            ),
+
+
             FindDropdown<UserModel>(
               label: "Personagem",
               onFind: (String filter) => getData(filter),
@@ -75,16 +89,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: (item?.avatar == null)
                       ? ListTile(
-                          leading: CircleAvatar(),
-                          title: Text("No item selected"),
-                        )
+                    leading: CircleAvatar(),
+                    title: Text("No item selected"),
+                  )
                       : ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(item.avatar),
-                          ),
-                          title: Text(item.name),
-                          subtitle: Text(item.createdAt.toString()),
-                        ),
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(item.avatar),
+                    ),
+                    title: Text(item.name),
+                    subtitle: Text(item.createdAt.toString()),
+                  ),
                 );
               },
               dropdownItemBuilder:
@@ -93,11 +107,62 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: !isSelected
                       ? null
                       : BoxDecoration(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
+                    border:
+                    Border.all(color: Theme.of(context).primaryColor),
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  child: ListTile(
+                    selected: isSelected,
+                    title: Text(item.name),
+                    subtitle: Text(item.createdAt.toString()),
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(item.avatar),
+                    ),
+                  ),
+                );
+              },
+            ),
+
+            FindDropdown<UserModel>(
+              label: "Person with clear option",
+              showClearButton: true,
+              onFind: (String filter) => getData(filter),
+              onChanged: (UserModel data) {
+                print(data);
+              },
+              dropdownBuilder: (BuildContext context, UserModel item) {
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Theme.of(context).dividerColor),
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  child: (item?.avatar == null)
+                      ? ListTile(
+                    leading: CircleAvatar(),
+                    title: Text("No item selected"),
+                  )
+                      : ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(item.avatar),
+                    ),
+                    title: Text(item.name),
+                    subtitle: Text(item.createdAt.toString()),
+                  ),
+                );
+              },
+              dropdownItemBuilder:
+                  (BuildContext context, UserModel item, bool isSelected) {
+                return Container(
+                  decoration: !isSelected
+                      ? null
+                      : BoxDecoration(
+                    border:
+                    Border.all(color: Theme.of(context).primaryColor),
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
                   child: ListTile(
                     selected: isSelected,
                     title: Text(item.name),

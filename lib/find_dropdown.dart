@@ -1,5 +1,6 @@
 library find_dropdown;
 
+import 'package:flutter/rendering.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -29,16 +30,20 @@ class FindDropdown<T> extends StatefulWidget {
   final FindDropdownValidationType<T> validate;
   final InputDecoration searchBoxDecoration;
   final Color backgroundColor;
-  final TextStyle titleStyle;
+  final String dialogTitle;
+  final TextStyle dialogTitleStyle;
+  final double dropdownBuilderHeight;
 
   const FindDropdown({
     Key key,
     @required this.onChanged,
     this.label,
+    this.dialogTitle,
     this.labelStyle,
     this.items,
     this.selectedItem,
     this.onFind,
+    this.dropdownBuilderHeight = 40,
     this.dropdownBuilder,
     this.dropdownItemBuilder,
     this.showSearchBox = true,
@@ -46,9 +51,10 @@ class FindDropdown<T> extends StatefulWidget {
     this.validate,
     this.searchBoxDecoration,
     this.backgroundColor,
-    this.titleStyle,
+    this.dialogTitleStyle,
   })  : assert(onChanged != null),
         super(key: key);
+
   @override
   _FindDropdownState<T> createState() => _FindDropdownState<T>();
 }
@@ -95,14 +101,16 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                     SelectDialog.showModal(
                       context,
                       items: widget.items,
-                      label: widget.label,
+                      label: widget.dialogTitle == null
+                          ? widget.label
+                          : widget.dialogTitle,
                       onFind: widget.onFind,
                       showSearchBox: widget.showSearchBox,
                       itemBuilder: widget.dropdownItemBuilder,
                       selectedValue: snapshot.data,
                       searchBoxDecoration: widget.searchBoxDecoration,
                       backgroundColor: widget.backgroundColor,
-                      titleStyle: widget.titleStyle,
+                      titleStyle: widget.dialogTitleStyle,
                       onChange: (item) {
                         bloc.selected$.add(item);
                         widget.onChanged(item);
@@ -110,10 +118,18 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                     );
                   },
                   child: (widget.dropdownBuilder != null)
-                      ? widget.dropdownBuilder(context, snapshot.data)
+                      ? Stack(children: <Widget>[
+                          widget.dropdownBuilder(context, snapshot.data),
+                          Positioned.fill(
+                              right: 5,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: manageTrailingIcon(snapshot),
+                              ))
+                        ])
                       : Container(
                           padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
-                          height: 40,
+                          height: widget.dropdownBuilderHeight,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
@@ -127,36 +143,8 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                             children: <Widget>[
                               Text(snapshot.data?.toString() ?? ""),
                               Align(
-                                alignment: Alignment.centerRight,
-                                child: Row(
-                                  children: <Widget>[
-                                    if (snapshot.data != null &&
-                                        widget.showClearButton)
-                                      GestureDetector(
-                                        onTap: () {
-                                          bloc.selected$.add(null);
-                                          widget.onChanged(null);
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 0),
-                                          child: Icon(
-                                            Icons.clear,
-                                            size: 25,
-                                            color: Colors.black54,
-                                          ),
-                                        ),
-                                      ),
-                                    if (snapshot.data == null ||
-                                        !widget.showClearButton)
-                                      Icon(
-                                        Icons.arrow_drop_down,
-                                        size: 25,
-                                        color: Colors.black54,
-                                      ),
-                                  ],
-                                ),
-                              ),
+                                  alignment: Alignment.centerRight,
+                                  child: manageTrailingIcon(snapshot)),
                             ],
                           ),
                         ),
@@ -184,6 +172,35 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
               )
           ],
         ),
+      ],
+    );
+  }
+
+  Widget manageTrailingIcon(snapshot) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        if (snapshot.data != null && widget.showClearButton)
+          GestureDetector(
+            onTap: () {
+              bloc.selected$.add(null);
+              widget.onChanged(null);
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 0),
+              child: Icon(
+                Icons.clear,
+                size: 25,
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        if (snapshot.data == null || !widget.showClearButton)
+          Icon(
+            Icons.arrow_drop_down,
+            size: 25,
+            color: Colors.black54,
+          ),
       ],
     );
   }

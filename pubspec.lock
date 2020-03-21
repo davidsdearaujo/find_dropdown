@@ -122,16 +122,14 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.22.2"
+    version: "0.23.1"
   select_dialog:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "1c6d7e6f36d5335b1911a5523fed8e85c750129d"
-      url: "https://github.com/Bwolfs2/select_dialog.git"
-    source: git
-    version: "1.0.6+1"
+      name: select_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -201,4 +199,4 @@ packages:
     source: hosted
     version: "3.5.0"
 sdks:
-  dart: ">=2.4.0 <3.0.0"
+  dart: ">=2.6.0 <3.0.0"
