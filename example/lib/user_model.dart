@@ -24,6 +24,13 @@ class UserModel {
   }
 
 
+
+  //this method will prevent the override of toString
+  static String userAsString(UserModel userModel){
+    return '#${userModel.id} ${userModel.name}';
+  }
+
+
   @override
   String toString() => name;
 

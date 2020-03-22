@@ -8,8 +8,9 @@ import 'find_dropdown_bloc.dart';
 
 typedef Future<List<T>> FindDropdownFindType<T>(String text);
 typedef void FindDropdownChangedType<T>(T selectedItem);
-typedef Widget FindDropdownBuilderType<T>(BuildContext context, T selectedText);
-typedef String FindDropdownValidationType<T>(T selectedText);
+typedef Widget FindDropdownBuilderType<T>(
+    BuildContext context, T selectedItem, String itemAsString);
+typedef String FindDropdownValidationType<T>(T selectedItem);
 typedef Widget FindDropdownItemBuilderType<T>(
   BuildContext context,
   T item,
@@ -33,26 +34,28 @@ class FindDropdown<T> extends StatefulWidget {
   final String dialogTitle;
   final TextStyle dialogTitleStyle;
   final double dropdownBuilderHeight;
+  final String Function(T item) itemAsString;
 
-  const FindDropdown({
-    Key key,
-    @required this.onChanged,
-    this.label,
-    this.dialogTitle,
-    this.labelStyle,
-    this.items,
-    this.selectedItem,
-    this.onFind,
-    this.dropdownBuilderHeight = 40,
-    this.dropdownBuilder,
-    this.dropdownItemBuilder,
-    this.showSearchBox = true,
-    this.showClearButton = false,
-    this.validate,
-    this.searchBoxDecoration,
-    this.backgroundColor,
-    this.dialogTitleStyle,
-  })  : assert(onChanged != null),
+  const FindDropdown(
+      {Key key,
+      @required this.onChanged,
+      this.label,
+      this.dialogTitle,
+      this.labelStyle,
+      this.items,
+      this.selectedItem,
+      this.onFind,
+      this.dropdownBuilderHeight = 40,
+      this.dropdownBuilder,
+      this.dropdownItemBuilder,
+      this.showSearchBox = true,
+      this.showClearButton = false,
+      this.validate,
+      this.searchBoxDecoration,
+      this.backgroundColor,
+      this.dialogTitleStyle,
+      this.itemAsString})
+      : assert(onChanged != null),
         super(key: key);
 
   @override
@@ -100,6 +103,8 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                   onTap: () {
                     SelectDialog.showModal(
                       context,
+                      //todo uncomment this line after updating selectDialogLibrary
+                      //itemAsString: widget.itemAsString,
                       items: widget.items,
                       label: widget.dialogTitle == null
                           ? widget.label
@@ -119,12 +124,13 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                   },
                   child: (widget.dropdownBuilder != null)
                       ? Stack(children: <Widget>[
-                          widget.dropdownBuilder(context, snapshot.data),
+                          widget.dropdownBuilder(context, snapshot.data,
+                              _manageSelectedItemDesignation(snapshot)),
                           Positioned.fill(
                               right: 5,
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: manageTrailingIcon(snapshot),
+                                child: _manageTrailingIcon(snapshot),
                               ))
                         ])
                       : Container(
@@ -141,10 +147,10 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(snapshot.data?.toString() ?? ""),
+                              Text(_manageSelectedItemDesignation(snapshot)),
                               Align(
                                   alignment: Alignment.centerRight,
-                                  child: manageTrailingIcon(snapshot)),
+                                  child: _manageTrailingIcon(snapshot)),
                             ],
                           ),
                         ),
@@ -176,7 +182,17 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
     );
   }
 
-  Widget manageTrailingIcon(snapshot) {
+  String _manageSelectedItemDesignation(snapshot) {
+    if (snapshot.data == null) {
+      return "";
+    } else if (widget.itemAsString == null) {
+      return snapshot.data.toString();
+    } else {
+      return widget.itemAsString(snapshot.data);
+    }
+  }
+
+  Widget _manageTrailingIcon(snapshot) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

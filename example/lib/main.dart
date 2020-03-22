@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
+              itemAsString: UserModel.userAsString,
               searchBoxDecoration: InputDecoration(
                 hintText: "Search",
                 border: OutlineInputBorder(),
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (UserModel data) {
                 print(data);
               },
-              dropdownBuilder: (BuildContext context, UserModel item) {
+              dropdownBuilder: (BuildContext context, UserModel item, String itemDesignation) {
                 return Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Theme.of(context).dividerColor),
@@ -131,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (UserModel data) {
                 print(data);
               },
-              dropdownBuilder: (BuildContext context, UserModel item) {
+              dropdownBuilder: (BuildContext context, UserModel item, String itemDesignation) {
                 return Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Theme.of(context).dividerColor),
