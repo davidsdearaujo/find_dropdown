@@ -17,7 +17,6 @@ typedef Widget FindDropdownItemBuilderType<T>(
 
 class FindDropdown<T> extends StatefulWidget {
   final String label;
-  final bool showSearchBox;
   final bool showClearButton;
   final TextStyle labelStyle;
   final List<T> items;
@@ -27,9 +26,25 @@ class FindDropdown<T> extends StatefulWidget {
   final FindDropdownBuilderType<T> dropdownBuilder;
   final FindDropdownItemBuilderType<T> dropdownItemBuilder;
   final FindDropdownValidationType<T> validate;
-  final InputDecoration searchBoxDecoration;
   final Color backgroundColor;
+  final WidgetBuilder emptyBuilder;
+  final WidgetBuilder loadingBuilder;
+  final ErrorBuilderType errorBuilder;
+  final bool autofocus;
+
+  ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
+  final bool showSearchBox;
+
+  ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
+  final InputDecoration searchBoxDecoration;
+
+  ///![image](https://user-images.githubusercontent.com/16373553/80187103-72e77d80-85e5-11ea-9349-e4dc8ec323bc.png)
   final TextStyle titleStyle;
+
+  ///|**Max width**: 90% of screen width|**Max height**: 70% of screen height|
+  ///|---|---|
+  ///|![image](https://user-images.githubusercontent.com/16373553/80189438-0a020480-85e9-11ea-8e63-3fabfa42c1c7.png)|![image](https://user-images.githubusercontent.com/16373553/80190562-e2ac3700-85ea-11ea-82ef-3383ae32ab02.png)|
+  final BoxConstraints constraints;
 
   const FindDropdown({
     Key key,
@@ -47,6 +62,11 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxDecoration,
     this.backgroundColor,
     this.titleStyle,
+    this.emptyBuilder,
+    this.loadingBuilder,
+    this.errorBuilder,
+    this.constraints,
+    this.autofocus,
   })  : assert(onChanged != null),
         super(key: key);
   @override
@@ -103,6 +123,11 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       searchBoxDecoration: widget.searchBoxDecoration,
                       backgroundColor: widget.backgroundColor,
                       titleStyle: widget.titleStyle,
+                      autofocus: widget.autofocus,
+                      constraints: widget.constraints,
+                      emptyBuilder: widget.emptyBuilder,
+                      errorBuilder: widget.errorBuilder,
+                      loadingBuilder: widget.loadingBuilder,
                       onChange: (item) {
                         bloc.selected$.add(item);
                         widget.onChanged(item);
