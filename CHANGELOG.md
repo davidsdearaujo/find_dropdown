@@ -1,6 +1,7 @@
 # [0.2.1]
 ## rxdart 0.24.x version bump
 ## Updated select_dialog to 1.2.0
+## License updated (MIT)
 ## Added properties
  - labelVisible - _To show the label in field_
  - searchBoxMaxLines
