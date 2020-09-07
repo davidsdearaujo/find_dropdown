@@ -1,3 +1,11 @@
+# [0.2.1]
+## rxdart 0.24.x version bump
+## Updated select_dialog to 1.2.0
+## Added properties
+ - labelVisible - _To show the label in field_
+ - searchBoxMaxLines
+ - searchBoxMinLines
+
 # [0.2.0] - 2020.04.20
 ## Added `autofocus` property
 ## Added web size adaptation
