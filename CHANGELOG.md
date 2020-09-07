@@ -1,4 +1,4 @@
-# [0.2.1]
+# [0.2.1] - 2020.09.06
 ## rxdart 0.24.x version bump
 ## Updated select_dialog to 1.2.0
 ## License updated (MIT)
