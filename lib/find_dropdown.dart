@@ -17,6 +17,7 @@ typedef Widget FindDropdownItemBuilderType<T>(
 
 class FindDropdown<T> extends StatefulWidget {
   final String label;
+  final bool labelVisible;
   final bool showClearButton;
   final TextStyle labelStyle;
   final List<T> items;
@@ -31,6 +32,8 @@ class FindDropdown<T> extends StatefulWidget {
   final WidgetBuilder loadingBuilder;
   final ErrorBuilderType errorBuilder;
   final bool autofocus;
+  final int searchBoxMaxLines;
+  final int searchBoxMinLines;
 
   ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
   final bool showSearchBox;
@@ -67,7 +70,11 @@ class FindDropdown<T> extends StatefulWidget {
     this.errorBuilder,
     this.constraints,
     this.autofocus,
+    this.searchBoxMaxLines,
+    this.searchBoxMinLines,
+    bool labelVisible = true,
   })  : assert(onChanged != null),
+        labelVisible = labelVisible ?? true,
         super(key: key);
   @override
   _FindDropdownState<T> createState() => _FindDropdownState<T>();
@@ -97,10 +104,10 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        if (widget.label != null)
+        if (widget.label != null && widget.labelVisible)
           Text(
             widget.label,
-            style: widget.labelStyle ?? Theme.of(context).textTheme.subhead,
+            style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1,
           ),
         if (widget.label != null) SizedBox(height: 5),
         Column(
@@ -128,6 +135,8 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       emptyBuilder: widget.emptyBuilder,
                       errorBuilder: widget.errorBuilder,
                       loadingBuilder: widget.loadingBuilder,
+                      searchBoxMaxLines: widget.searchBoxMaxLines,
+                      searchBoxMinLines: widget.searchBoxMinLines,
                       onChange: (item) {
                         bloc.selected$.add(item);
                         widget.onChanged(item);
@@ -198,7 +207,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       padding: const EdgeInsets.all(5),
                       child: Text(
                         snapshot.data ?? "",
-                        style: Theme.of(context).textTheme.body1.copyWith(
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
                             color: snapshot.hasData
                                 ? Theme.of(context).errorColor
                                 : Colors.transparent),
