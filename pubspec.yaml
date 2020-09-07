@@ -1,6 +1,6 @@
 name: find_dropdown
 description: Simple and robust FindDropdown with item search feature, making it possible to use an offline item list or filtering URL for easy customization.
-version: 0.2.0
+version: 0.2.1
 author: F-Team <david@flutterando.com.br>
 homepage: https://flutterando.com.br/
 git: https://github.com/davidsdearaujo/find_dropdown
@@ -11,12 +11,17 @@ environment:
 
 dependencies:
   rxdart: ">=0.23.0 <0.25.0"
-  select_dialog: ^1.1.0
-  # select_dialog: 
-  #   git:
-  #     url: https://github.com/davidsdearaujo/select_dialog.git
+  select_dialog: ^1.2.0
   flutter:
     sdk: flutter
+
+# dependency_overrides:
+#   select_dialog: 
+#     git:
+#       url: https://github.com/davidsdearaujo/select_dialog.git
+#   select_dialog:
+#     path: C:\projects\packages\select_dialog
+
 
 dev_dependencies:
   flutter_test:
