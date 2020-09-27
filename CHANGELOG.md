@@ -1,3 +1,7 @@
+# [0.2.2] - 2020.09.27
+## Updated select_dialog to 1.2.1
+## Added multiple select items support
+
 # [0.2.1] - 2020.09.06
 ## rxdart 0.24.x version bump
 ## Updated select_dialog to 1.2.0

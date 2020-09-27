@@ -7,6 +7,9 @@ Simple and robust FindDropdown with item search feature, making it possible to u
 ![](https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/Screenshot_4.png?raw=true)
 
 <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Simple.gif?raw=true" width="49.5%" /> <img src="https://github.com/davidsdearaujo/find_dropdown/blob/master/screenshots/GIF_Custom_Layout.gif?raw=true" width="49.5%" />
+<img src="https://user-images.githubusercontent.com/16373553/94360038-f0c22000-0080-11eb-8687-d5e8af02ed7b.png" width="49.5%" />
+
+
 
 ## ATTENTION
 If you use rxdart in your project in a version lower than 0.23.x, use version `0.1.7+1` of this package. Otherwise, you can use the most current version!
@@ -29,6 +32,16 @@ FindDropdown(
   label: "País",
   onChanged: (String item) => print(item),
   selectedItem: "Brasil",
+);
+```
+
+## Multiple items
+```dart
+FindDropdown<String>.multiSelect(
+  items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+  label: "País",
+  onChanged: (List<String> items) => print(items),
+  selectedItems: ["Brasil"],
 );
 ```
 
@@ -68,6 +81,9 @@ FindDropdown<UserModel>(
   },
 );
 ```
+
+### [MORE EXAMPLES](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
+
 ## Layout customization
 You can customize the layout of the FindDropdown and its items. [EXAMPLE](https://github.com/davidsdearaujo/find_dropdown/tree/master/example#custom-layout-endpoint-example)
 

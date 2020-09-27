@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
               backgroundColor: Colors.redAccent,
-              titleStyle:TextStyle(color: Colors.greenAccent),
+              titleStyle: TextStyle(color: Colors.greenAccent),
               validate: (String item) {
                 if (item == null)
                   return "Required field";
@@ -49,6 +49,45 @@ class _MyHomePageState extends State<MyHomePage> {
                   return "Invalid item";
                 else
                   return null;
+              },
+            ),
+            FindDropdown<String>.multiSelect(
+              items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+              label: "País",
+              selectedItems: ["Brasil"],
+              onChanged: (selectedItem) {
+                print(selectedItem.join(", "));
+              },
+              showSearchBox: false,
+              labelStyle: TextStyle(color: Colors.redAccent),
+              titleStyle: TextStyle(color: Colors.greenAccent),
+              dropdownItemBuilder: (context, item, isSelected) {
+                return ListTile(
+                  title: Text(item.toString()),
+                  trailing: isSelected ? Icon(Icons.check) : null,
+                  selected: isSelected,
+                );
+              },
+              okButtonBuilder: (context, onPressed) {
+                return Align(
+                  alignment: Alignment.centerRight,
+                  child: FloatingActionButton(
+                    child: Icon(Icons.check),
+                    onPressed: onPressed,
+                    mini: true,
+                  ),
+                );
+              },
+              validate: (List<String> items) {
+                print("VALIDATION: $items");
+                String response;
+                if (items == null || items.isEmpty) {
+                  response = "Required field";
+                } else if (items.contains("Brasil")) {
+                  response = "'Brasil' não pode ser selecionado.";
+                }
+                print(response);
+                return response;
               },
             ),
             FindDropdown<UserModel>(
