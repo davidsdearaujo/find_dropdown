@@ -25,6 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var countriesKey = GlobalKey<FindDropdownState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown(
               items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
               label: "País",
-              onChanged: print,
+              onChanged: (item) {
+                print(item);
+                countriesKey.currentState.setSelectedItem(<String>[]);
+              },
               selectedItem: "Brasil",
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
@@ -52,11 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             FindDropdown<String>.multiSelect(
+              key: countriesKey,
               items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
-              label: "País",
+              label: "Países",
               selectedItems: ["Brasil"],
-              onChanged: (selectedItem) {
-                print(selectedItem.join(", "));
+              onChanged: (selectedItems) {
+                print("countries: $selectedItems");
               },
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),

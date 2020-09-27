@@ -130,24 +130,30 @@ class FindDropdown<T> extends StatefulWidget {
         super(key: key);
 
   @override
-  _FindDropdownState<T> createState() => _FindDropdownState<T>();
+  FindDropdownState<T> createState() => FindDropdownState<T>();
 }
 
-class _FindDropdownState<T> extends State<FindDropdown<T>> {
-  FindDropdownBloc bloc;
+class FindDropdownState<T> extends State<FindDropdown<T>> {
+  FindDropdownBloc _bloc;
 
   bool get isMultipleItems => widget.onMultipleItemsChanged != null;
+
+  void setSelectedItem(dynamic item) {
+    if (isMultipleItems) assert(item is List<T>);
+    if (!isMultipleItems) assert(item == null || item is T);
+    _bloc.selected$.add(item);
+  }
 
   @override
   void initState() {
     super.initState();
     if (isMultipleItems) {
-      bloc = FindDropdownBloc<List<T>>(
+      _bloc = FindDropdownBloc<List<T>>(
         seedValue: widget.multipleSelectedItems,
         validate: widget.validateMultipleItems,
       );
     } else {
-      bloc = FindDropdownBloc<T>(
+      _bloc = FindDropdownBloc<T>(
         seedValue: widget.selectedItem,
         validate: widget.validate,
       );
@@ -156,7 +162,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
 
   @override
   void dispose() {
-    bloc.dispose();
+    _bloc.dispose();
     super.dispose();
   }
 
@@ -177,7 +183,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             StreamBuilder(
-              stream: bloc.selected$,
+              stream: _bloc.selected$,
               builder: (context, snapshot) {
                 return GestureDetector(
                   onTap: () {
@@ -204,14 +210,14 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                       searchBoxMinLines: widget.searchBoxMinLines,
                       onMultipleItemsChange: isMultipleItems
                           ? (items) {
-                              bloc.selected$.add(items);
+                              _bloc.selected$.add(items);
                               widget.onMultipleItemsChanged(items);
                             }
                           : null,
                       onChange: isMultipleItems
                           ? null
                           : (item) {
-                              bloc.selected$.add(item);
+                              _bloc.selected$.add(item);
                               widget.onChanged(item);
                             },
                     );
@@ -253,7 +259,7 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
                                           if (showClearButton)
                                             GestureDetector(
                                               onTap: () {
-                                                bloc.selected$.add(null);
+                                                _bloc.selected$.add(null);
                                                 widget.onChanged(null);
                                               },
                                               child: Padding(
@@ -285,8 +291,9 @@ class _FindDropdownState<T> extends State<FindDropdown<T>> {
             ),
             if (widget.validate != null || widget.validateMultipleItems != null)
               StreamBuilder<String>(
-                stream: bloc.validateMessageOut,
+                stream: _bloc.validateMessageOut,
                 builder: (context, snapshot) {
+                  print("${widget.label} - ${snapshot.data}");
                   return ConstrainedBox(
                     constraints: BoxConstraints(minHeight: 15),
                     child: Padding(

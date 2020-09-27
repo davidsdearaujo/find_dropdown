@@ -32,6 +32,16 @@ FindDropdown(
 );
 ```
 
+## Múltiplos itens selecionáveis
+```dart
+FindDropdown<String>.multiSelect(
+  items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+  label: "País",
+  onChanged: (List<String> items) => print(items),
+  selectedItems: ["Brasil"],
+);
+```
+
 ## Validação
 ```dart
 FindDropdown(
@@ -67,6 +77,39 @@ FindDropdown<UserModel>(
   },
 );
 ```
+
+## Alterar ou Limpar os itens selecionados
+```dart
+var countriesKey = GlobalKey<FindDropdownState>();
+
+Column(
+  children: [
+    FindDropdown<UserModel>(
+      label: "Nome",
+      onFind: (String filter) => getData(filter),
+      searchBoxDecoration: InputDecoration(
+        hintText: "Search",
+        border: OutlineInputBorder(),
+      ),
+      onChanged: (UserModel data) {
+        print(data);
+        countriesKey.currentState.setSelectedItem(null);
+      },
+    ),
+    FindDropdown<String>(
+      key: countriesKey,
+      items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+      label: "País",
+      selectedItem: "Brasil",
+      showSearchBox: false,
+      onChanged: (selectedItem) => print("country: $selectedItem"),
+    ),
+  ],
+)
+``` 
+
+### [MAIS EXEMPLOS](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
+
 ## Customização de layout
 É possível customizar o layout do FindDropdown e de seus itens. [EXEMPLO](https://github.com/davidsdearaujo/find_dropdown/tree/master/example#custom-layout-endpoint-example)
 
@@ -102,6 +145,3 @@ class UserModel {
 
 }
 ```
-
-
-# [Ver mais Exemplos](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)

@@ -35,7 +35,7 @@ FindDropdown(
 );
 ```
 
-## Multiple items
+## Multiple selectable items
 ```dart
 FindDropdown<String>.multiSelect(
   items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
@@ -82,6 +82,36 @@ FindDropdown<UserModel>(
 );
 ```
 
+## Change or Clear selected items
+```dart
+var countriesKey = GlobalKey<FindDropdownState>();
+
+Column(
+  children: [
+    FindDropdown<UserModel>(
+      label: "Nome",
+      onFind: (String filter) => getData(filter),
+      searchBoxDecoration: InputDecoration(
+        hintText: "Search",
+        border: OutlineInputBorder(),
+      ),
+      onChanged: (UserModel data) {
+        print(data);
+        countriesKey.currentState.setSelectedItem(null);
+      },
+    ),
+    FindDropdown<String>(
+      key: countriesKey,
+      items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+      label: "País",
+      selectedItem: "Brasil",
+      showSearchBox: false,
+      onChanged: (selectedItem) => print("country: $selectedItem"),
+    ),
+  ],
+)
+``` 
+
 ### [MORE EXAMPLES](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
 
 ## Layout customization
@@ -119,5 +149,3 @@ class UserModel {
 
 }
 ```
-
-# [View more Examples](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
