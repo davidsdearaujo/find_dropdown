@@ -44,6 +44,7 @@ class FindDropdown<T> extends StatefulWidget {
   final int searchBoxMaxLines;
   final int searchBoxMinLines;
   final ButtonBuilderType okButtonBuilder;
+  final String searchHint;
 
   ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
   final bool showSearchBox;
@@ -84,6 +85,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     bool labelVisible = true,
+    this.searchHint,
   })  : assert(onChanged != null),
         this.labelVisible = labelVisible ?? true,
         this.dropdownMultipleItemsBuilder = dropdownBuilder,
@@ -121,6 +123,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     bool labelVisible = true,
+    this.searchHint,
   })  : assert(onChanged != null),
         labelVisible = labelVisible ?? true,
         this.validateMultipleItems = null,
@@ -199,6 +202,7 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                       itemBuilder: widget.dropdownItemBuilder,
                       selectedValue: isMultipleItems ? null : snapshot.data,
                       searchBoxDecoration: widget.searchBoxDecoration,
+                      searchHint: widget.searchHint,
                       backgroundColor: widget.backgroundColor,
                       titleStyle: widget.titleStyle,
                       autofocus: widget.autofocus,
