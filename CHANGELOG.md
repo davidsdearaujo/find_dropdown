@@ -1,3 +1,7 @@
+# [0.2.3] - 2021.02.12
+## Added searchHint property to change the hintText 
+
+
 # [0.2.2] - 2020.09.27
 ## Updated select_dialog to 1.2.1
 ## Added multiple select items support
