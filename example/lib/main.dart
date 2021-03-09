@@ -11,9 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: MyHomePage(),
     );
   }
@@ -35,18 +33,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             FindDropdown(
-              items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+              items: [
+                "Brasil",
+                "Itália",
+                "Estados Unidos",
+                "Canadá"
+              ],
               label: "País",
               onChanged: (item) {
                 print(item);
-                countriesKey.currentState.setSelectedItem(<String>[]);
+                countriesKey.currentState?.setSelectedItem(<String>[]);
               },
               selectedItem: "Brasil",
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
               backgroundColor: Colors.redAccent,
               titleStyle: TextStyle(color: Colors.greenAccent),
-              validate: (String item) {
+              validate: (String? item) {
                 if (item == null)
                   return "Required field";
                 else if (item == "Brasil")
@@ -57,12 +60,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FindDropdown<String>.multiSelect(
               key: countriesKey,
-              items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+              items: [
+                "Brasil",
+                "Itália",
+                "Estados Unidos",
+                "Canadá"
+              ],
               label: "Países",
-              selectedItems: ["Brasil"],
-              onChanged: (selectedItems) {
-                print("countries: $selectedItems");
-              },
+              selectedItems: [
+                "Brasil"
+              ],
+              onChanged: (selectedItems) => print("countries: $selectedItems"),
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
               titleStyle: TextStyle(color: Colors.greenAccent),
@@ -76,16 +84,12 @@ class _MyHomePageState extends State<MyHomePage> {
               okButtonBuilder: (context, onPressed) {
                 return Align(
                   alignment: Alignment.centerRight,
-                  child: FloatingActionButton(
-                    child: Icon(Icons.check),
-                    onPressed: onPressed,
-                    mini: true,
-                  ),
+                  child: FloatingActionButton(child: Icon(Icons.check), onPressed: onPressed, mini: true),
                 );
               },
-              validate: (List<String> items) {
+              validate: (List<String>? items) {
                 print("VALIDATION: $items");
-                String response;
+                String? response;
                 if (items == null || items.isEmpty) {
                   response = "Required field";
                 } else if (items.contains("Brasil")) {
@@ -98,19 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
-              searchBoxDecoration: InputDecoration(
-                hintText: "Search",
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (UserModel data) => print(data),
+              searchBoxDecoration: InputDecoration(hintText: "Search", border: OutlineInputBorder()),
+              onChanged: (UserModel? data) => print(data),
             ),
             FindDropdown<UserModel>(
               label: "Personagem",
               onFind: (String filter) => getData(filter),
-              onChanged: (UserModel data) {
-                print(data);
-              },
-              dropdownBuilder: (BuildContext context, UserModel item) {
+              onChanged: (UserModel? data) => print(data),
+              dropdownBuilder: (BuildContext context, UserModel? item) {
                 return Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Theme.of(context).dividerColor),
@@ -118,27 +117,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                   ),
                   child: (item?.avatar == null)
-                      ? ListTile(
-                          leading: CircleAvatar(),
-                          title: Text("No item selected"),
-                        )
+                      ? ListTile(leading: CircleAvatar(), title: Text("No item selected"))
                       : ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(item.avatar),
-                          ),
+                          leading: CircleAvatar(backgroundImage: NetworkImage(item!.avatar)),
                           title: Text(item.name),
                           subtitle: Text(item.createdAt.toString()),
                         ),
                 );
               },
-              dropdownItemBuilder:
-                  (BuildContext context, UserModel item, bool isSelected) {
+              dropdownItemBuilder: (BuildContext context, UserModel item, bool isSelected) {
                 return Container(
                   decoration: !isSelected
                       ? null
                       : BoxDecoration(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
+                          border: Border.all(color: Theme.of(context).primaryColor),
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white,
                         ),
@@ -146,9 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     selected: isSelected,
                     title: Text(item.name),
                     subtitle: Text(item.createdAt.toString()),
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(item.avatar),
-                    ),
+                    leading: CircleAvatar(backgroundImage: NetworkImage(item.avatar)),
                   ),
                 );
               },
@@ -162,7 +152,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<List<UserModel>> getData(filter) async {
     var response = await Dio().get(
       "http://5d85ccfb1e61af001471bf60.mockapi.io/user",
-      queryParameters: {"filter": filter},
+      queryParameters: {
+        "filter": filter
+      },
     );
 
     var models = UserModel.fromJsonList(response.data);
