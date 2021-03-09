@@ -16,7 +16,9 @@ If you use rxdart in your project in a version lower than 0.23.x, use version `0
 
 ## Versions
 **RxDart 0.23.x or less**: 0.1.7+1
+
 **Non Null Safety Version**: 0.2.3 or less
+
 **Null Safety Version**: 1.0.0 or more
 
 ## packages.yaml
