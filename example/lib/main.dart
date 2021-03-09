@@ -70,9 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
               selectedItems: [
                 "Brasil"
               ],
-              onChanged: (selectedItems) {
-                print("countries: $selectedItems");
-              },
+              onChanged: (selectedItems) => print("countries: $selectedItems"),
               showSearchBox: false,
               labelStyle: TextStyle(color: Colors.redAccent),
               titleStyle: TextStyle(color: Colors.greenAccent),
@@ -86,11 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
               okButtonBuilder: (context, onPressed) {
                 return Align(
                   alignment: Alignment.centerRight,
-                  child: FloatingActionButton(
-                    child: Icon(Icons.check),
-                    onPressed: onPressed,
-                    mini: true,
-                  ),
+                  child: FloatingActionButton(child: Icon(Icons.check), onPressed: onPressed, mini: true),
                 );
               },
               validate: (List<String>? items) {
@@ -108,10 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FindDropdown<UserModel>(
               label: "Nome",
               onFind: (String filter) => getData(filter),
-              searchBoxDecoration: InputDecoration(
-                hintText: "Search",
-                border: OutlineInputBorder(),
-              ),
+              searchBoxDecoration: InputDecoration(hintText: "Search", border: OutlineInputBorder()),
               onChanged: (UserModel? data) => print(data),
             ),
             FindDropdown<UserModel>(
@@ -126,10 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                   ),
                   child: (item?.avatar == null)
-                      ? ListTile(
-                          leading: CircleAvatar(),
-                          title: Text("No item selected"),
-                        )
+                      ? ListTile(leading: CircleAvatar(), title: Text("No item selected"))
                       : ListTile(
                           leading: CircleAvatar(backgroundImage: NetworkImage(item!.avatar)),
                           title: Text(item.name),

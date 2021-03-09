@@ -45,6 +45,7 @@ class FindDropdown<T> extends StatefulWidget {
   final int? searchBoxMaxLines;
   final int? searchBoxMinLines;
   final ButtonBuilderType? okButtonBuilder;
+  @Deprecated("Use 'hintText' property from searchBoxDecoration")
   final String? searchHint;
 
   ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
@@ -86,7 +87,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     this.labelVisible = true,
-    this.searchHint,
+    @Deprecated("Use 'hintText' property from searchBoxDecoration") this.searchHint,
   })  : this.dropdownMultipleItemsBuilder = dropdownBuilder,
         this.multipleSelectedItems = selectedItems,
         this.onMultipleItemsChanged = onChanged,
@@ -122,7 +123,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     this.labelVisible = true,
-    this.searchHint,
+    @Deprecated("Use 'hintText' property from searchBoxDecoration") this.searchHint,
   })  : this.onChanged = onChanged,
         this.validateMultipleItems = null,
         this.dropdownMultipleItemsBuilder = null,
@@ -186,7 +187,7 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                 if (isMultipleItems) multipleSelectedValues = snapshot.data! as List<T>;
 
                 T? selectedValue;
-                if (!isMultipleItems) selectedValue = snapshot.data! as T;
+                if (!isMultipleItems) selectedValue = snapshot.data as T?;
 
                 return GestureDetector(
                   onTap: () {
@@ -204,13 +205,13 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                       searchHint: widget.searchHint,
                       backgroundColor: widget.backgroundColor,
                       titleStyle: widget.titleStyle,
-                      autofocus: widget.autofocus,
+                      autofocus: widget.autofocus ?? false,
                       constraints: widget.constraints,
                       emptyBuilder: widget.emptyBuilder,
                       errorBuilder: widget.errorBuilder,
                       loadingBuilder: widget.loadingBuilder,
-                      searchBoxMaxLines: widget.searchBoxMaxLines,
-                      searchBoxMinLines: widget.searchBoxMinLines,
+                      searchBoxMaxLines: widget.searchBoxMaxLines ?? 1,
+                      searchBoxMinLines: widget.searchBoxMinLines ?? 1,
                       onMultipleItemsChange: isMultipleItems
                           ? (items) {
                               _bloc.selected$.add(items);
