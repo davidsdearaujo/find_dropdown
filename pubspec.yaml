@@ -7,10 +7,9 @@ git: https://github.com/davidsdearaujo/find_dropdown
 repository: https://github.com/davidsdearaujo/find_dropdown
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
-  rxdart: ">=0.23.0 <0.25.0"
   select_dialog: ^1.2.1
   flutter:
     sdk: flutter
