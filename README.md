@@ -89,7 +89,31 @@ FindDropdown<UserModel>(
 );
 ```
 
-## Change or Clear selected items
+## Clear selected items
+```dart
+var countriesKey = GlobalKey<FindDropdownState>();
+
+Column(
+  children: [
+    FindDropdown<String>(
+      key: countriesKey,
+      items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+      label: "País",
+      selectedItem: "Brasil",
+      showSearchBox: false,
+      onChanged: (selectedItem) => print("country: $selectedItem"),
+    ),
+    RaisedButton(
+      child: Text('Limpar Países'),
+      color: Theme.of(context).primaryColor,
+      textColor: Theme.of(context).primaryIconTheme.color,
+      onPressed: () => countriesKey.currentState?.clear(),
+    ),
+  ],
+)
+``` 
+
+## Change selected items
 ```dart
 var countriesKey = GlobalKey<FindDropdownState>();
 
@@ -104,7 +128,7 @@ Column(
       ),
       onChanged: (UserModel data) {
         print(data);
-        countriesKey.currentState.setSelectedItem(null);
+        countriesKey.currentState.setSelectedItem("Brasil");
       },
     ),
     FindDropdown<String>(

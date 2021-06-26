@@ -146,6 +146,11 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
     _bloc.selected$.add(item);
   }
 
+  void clear() {
+    final newValue = (isMultipleItems) ? <T>[] : null;
+    setSelectedItem(newValue);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -174,7 +179,8 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        if (widget.label != null && widget.labelVisible) Text(widget.label!, style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1),
+        if (widget.label != null && widget.labelVisible)
+          Text(widget.label!, style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1),
         if (widget.label != null) SizedBox(height: 5),
         Column(
           mainAxisSize: MainAxisSize.min,
@@ -184,7 +190,7 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
               stream: _bloc.selected$,
               builder: (context, snapshot) {
                 List<T>? multipleSelectedValues;
-                if (isMultipleItems) multipleSelectedValues = snapshot.data! as List<T>;
+                if (isMultipleItems) multipleSelectedValues = (snapshot.data ?? <T>[]) as List<T>;
 
                 T? selectedValue;
                 if (!isMultipleItems) selectedValue = snapshot.data as T?;

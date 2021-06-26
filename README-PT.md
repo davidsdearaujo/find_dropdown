@@ -78,7 +78,31 @@ FindDropdown<UserModel>(
 );
 ```
 
-## Alterar ou Limpar os itens selecionados
+## Limpar os itens selecionados
+```dart
+var countriesKey = GlobalKey<FindDropdownState>();
+
+Column(
+  children: [
+    FindDropdown<String>(
+      key: countriesKey,
+      items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
+      label: "País",
+      selectedItem: "Brasil",
+      showSearchBox: false,
+      onChanged: (selectedItem) => print("country: $selectedItem"),
+    ),
+    RaisedButton(
+      child: Text('Limpar Países'),
+      color: Theme.of(context).primaryColor,
+      textColor: Theme.of(context).primaryIconTheme.color,
+      onPressed: () => countriesKey.currentState?.clear(),
+    ),
+  ],
+)
+``` 
+
+## Alterar os itens selecionados
 ```dart
 var countriesKey = GlobalKey<FindDropdownState>();
 
@@ -107,6 +131,7 @@ Column(
   ],
 )
 ``` 
+
 
 ### [MAIS EXEMPLOS](https://github.com/davidsdearaujo/find_dropdown/tree/master/example)
 

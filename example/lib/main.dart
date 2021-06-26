@@ -24,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var countriesKey = GlobalKey<FindDropdownState>();
+  var nameKey = GlobalKey<FindDropdownState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,12 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             FindDropdown(
-              items: [
-                "Brasil",
-                "Itália",
-                "Estados Unidos",
-                "Canadá"
-              ],
+              items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
               label: "País",
               onChanged: (item) {
                 print(item);
@@ -46,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               selectedItem: "Brasil",
               showSearchBox: false,
-              labelStyle: TextStyle(color: Colors.redAccent),
+              labelStyle: TextStyle(color: Colors.blue),
               backgroundColor: Colors.redAccent,
               titleStyle: TextStyle(color: Colors.greenAccent),
               validate: (String? item) {
@@ -60,20 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FindDropdown<String>.multiSelect(
               key: countriesKey,
-              items: [
-                "Brasil",
-                "Itália",
-                "Estados Unidos",
-                "Canadá"
-              ],
+              items: ["Brasil", "Itália", "Estados Unidos", "Canadá"],
               label: "Países",
-              selectedItems: [
-                "Brasil"
-              ],
+              selectedItems: ["Brasil"],
               onChanged: (selectedItems) => print("countries: $selectedItems"),
               showSearchBox: false,
-              labelStyle: TextStyle(color: Colors.redAccent),
-              titleStyle: TextStyle(color: Colors.greenAccent),
+              labelStyle: TextStyle(color: Colors.blue),
+              titleStyle: TextStyle(color: Colors.green),
               dropdownItemBuilder: (context, item, isSelected) {
                 return ListTile(
                   title: Text(item.toString()),
@@ -100,11 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             FindDropdown<UserModel>(
+              key: nameKey,
               label: "Nome",
               onFind: (String filter) => getData(filter),
               searchBoxDecoration: InputDecoration(hintText: "Search", border: OutlineInputBorder()),
               onChanged: (UserModel? data) => print(data),
             ),
+            SizedBox(height: 25),
             FindDropdown<UserModel>(
               label: "Personagem",
               onFind: (String filter) => getData(filter),
@@ -143,6 +134,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+            SizedBox(height: 25),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RaisedButton(
+                    child: Text('Limpar Países'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).primaryIconTheme.color,
+                    onPressed: () => countriesKey.currentState?.clear()),
+                SizedBox(width: 25),
+                RaisedButton(
+                    child: Text('Limpar Nome'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).primaryIconTheme.color,
+                    onPressed: () => nameKey.currentState?.clear()),
+              ],
+            ),
           ],
         ),
       ),
@@ -152,9 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<List<UserModel>> getData(filter) async {
     var response = await Dio().get(
       "http://5d85ccfb1e61af001471bf60.mockapi.io/user",
-      queryParameters: {
-        "filter": filter
-      },
+      queryParameters: {"filter": filter},
     );
 
     var models = UserModel.fromJsonList(response.data);

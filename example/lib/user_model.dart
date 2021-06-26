@@ -21,7 +21,6 @@ class UserModel {
     return list.map((item) => UserModel.fromJson(item)).toList();
   }
 
-
   @override
   String toString() => name;
 
@@ -29,6 +28,5 @@ class UserModel {
   operator ==(o) => o is UserModel && o.id == id;
 
   @override
-  int get hashCode => id.hashCode^name.hashCode^createdAt.hashCode;
-
+  int get hashCode => id.hashCode ^ name.hashCode ^ createdAt.hashCode;
 }
