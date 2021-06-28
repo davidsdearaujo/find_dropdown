@@ -100,7 +100,7 @@ class FindDropdown<T> extends StatefulWidget {
 
   const FindDropdown({
     Key? key,
-    required FindDropdownChangedType<T> onChanged,
+    required FindDropdownChangedType<T?> onChanged,
     this.label,
     this.labelStyle,
     this.items,
@@ -196,6 +196,7 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                 if (!isMultipleItems) selectedValue = snapshot.data as T?;
 
                 return GestureDetector(
+                  key: ValueKey(selectedValue),
                   onTap: () {
                     SelectDialog.showModal<T>(
                       context,
