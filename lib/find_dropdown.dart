@@ -1,7 +1,7 @@
 library find_dropdown;
 
-import 'package:select_dialog/select_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:select_dialog/select_dialog.dart';
 
 import 'find_dropdown_bloc.dart';
 import 'validation_message_widget.dart';
@@ -235,44 +235,46 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                   },
                   child: widget.dropdownBuilder?.call(context, selectedValue) ??
                       widget.dropdownMultipleItemsBuilder?.call(context, multipleSelectedValues ?? []) ??
-                      Builder(builder: (context) {
-                        String? title = isMultipleItems ? multipleSelectedValues?.join(", ").toString() : snapshot.data?.toString();
-                        bool showClearButton = snapshot.data != null && widget.showClearButton;
-                        return Container(
-                          padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(4.0),
-                            border: Border.all(width: 1, color: Theme.of(context).dividerColor),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(title ?? ""),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Row(
-                                  children: <Widget>[
-                                    if (showClearButton)
-                                      GestureDetector(
-                                        onTap: () {
-                                          _bloc.selected$.add(null);
-                                          widget.onChanged?.call(null);
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(right: 0),
-                                          child: const Icon(Icons.clear, size: 25, color: Colors.black54),
+                      Builder(
+                        builder: (context) {
+                          String? title = isMultipleItems ? multipleSelectedValues?.join(", ").toString() : snapshot.data?.toString();
+                          bool showClearButton = snapshot.data != null && widget.showClearButton;
+                          return Container(
+                            padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4.0),
+                              border: Border.all(width: 1, color: Theme.of(context).dividerColor),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Expanded(child: Text(title ?? "", overflow: TextOverflow.ellipsis)),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Row(
+                                    children: <Widget>[
+                                      if (showClearButton)
+                                        GestureDetector(
+                                          onTap: () {
+                                            _bloc.selected$.add(null);
+                                            widget.onChanged?.call(null);
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(right: 0),
+                                            child: const Icon(Icons.clear, size: 25, color: Colors.black54),
+                                          ),
                                         ),
-                                      ),
-                                    if (!showClearButton) const Icon(Icons.arrow_drop_down, size: 25, color: Colors.black54),
-                                  ],
+                                      if (!showClearButton) const Icon(Icons.arrow_drop_down, size: 25, color: Colors.black54),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                 );
               },
             ),
