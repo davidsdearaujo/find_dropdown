@@ -54,6 +54,8 @@ class FindDropdown<T> extends StatefulWidget {
   ///![image](https://user-images.githubusercontent.com/16373553/80187339-db365f00-85e5-11ea-81ad-df17d7e7034e.png)
   final InputDecoration? searchBoxDecoration;
 
+  final BoxDecoration? containerBoxDecoration;
+
   ///![image](https://user-images.githubusercontent.com/16373553/80187103-72e77d80-85e5-11ea-9349-e4dc8ec323bc.png)
   final TextStyle? titleStyle;
 
@@ -76,6 +78,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.showClearButton = false,
     FindDropdownValidationType<List<T>>? validate,
     this.searchBoxDecoration,
+    this.containerBoxDecoration,
     this.backgroundColor,
     this.titleStyle,
     this.emptyBuilder,
@@ -112,6 +115,7 @@ class FindDropdown<T> extends StatefulWidget {
     this.showClearButton = false,
     this.validate,
     this.searchBoxDecoration,
+    this.containerBoxDecoration,
     this.backgroundColor,
     this.titleStyle,
     this.emptyBuilder,
@@ -242,7 +246,7 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                           return Container(
                             padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
                             height: 40,
-                            decoration: BoxDecoration(
+                            decoration: widget.containerBoxDecoration ?? BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(4.0),
                               border: Border.all(width: 1, color: Theme.of(context).dividerColor),
