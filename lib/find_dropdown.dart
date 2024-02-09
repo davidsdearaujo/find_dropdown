@@ -1,7 +1,7 @@
 library find_dropdown;
 
-import 'package:flutter/material.dart';
 import 'package:select_dialog/select_dialog.dart';
+import 'package:flutter/material.dart';
 
 import 'find_dropdown_bloc.dart';
 import 'validation_message_widget.dart';
@@ -10,7 +10,8 @@ typedef Future<List<T>> FindDropdownFindType<T>(String text);
 typedef void FindDropdownChangedType<T>(T? selectedItem);
 typedef void FindDropdownMultipleItemsChangedType<T>(List<T> selectedItem);
 typedef String? FindDropdownValidationType<T>(T? selectedText);
-typedef Widget FindDropdownBuilderType<T>(BuildContext context, T? selectedItem);
+typedef Widget FindDropdownBuilderType<T>(
+    BuildContext context, T? selectedItem);
 typedef Widget FindDropdownMultipleItemsBuilderType<T>(
   BuildContext context,
   List<T> selectedItem,
@@ -87,7 +88,8 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     this.labelVisible = true,
-    @Deprecated("Use 'hintText' property from searchBoxDecoration") this.searchHint,
+    @Deprecated("Use 'hintText' property from searchBoxDecoration")
+        this.searchHint,
   })  : this.dropdownMultipleItemsBuilder = dropdownBuilder,
         this.multipleSelectedItems = selectedItems,
         this.onMultipleItemsChanged = onChanged,
@@ -100,7 +102,7 @@ class FindDropdown<T> extends StatefulWidget {
 
   const FindDropdown({
     Key? key,
-    required FindDropdownChangedType<T?> onChanged,
+    required FindDropdownChangedType<T> onChanged,
     this.label,
     this.labelStyle,
     this.items,
@@ -123,7 +125,8 @@ class FindDropdown<T> extends StatefulWidget {
     this.searchBoxMinLines,
     this.okButtonBuilder,
     this.labelVisible = true,
-    @Deprecated("Use 'hintText' property from searchBoxDecoration") this.searchHint,
+    @Deprecated("Use 'hintText' property from searchBoxDecoration")
+        this.searchHint,
   })  : this.onChanged = onChanged,
         this.validateMultipleItems = null,
         this.dropdownMultipleItemsBuilder = null,
@@ -144,11 +147,6 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
     if (isMultipleItems) assert(item is List<T>);
     if (!isMultipleItems) assert(item == null || item is T);
     _bloc.selected$.add(item);
-  }
-
-  void clear() {
-    final newValue = (isMultipleItems) ? <T>[] : null;
-    setSelectedItem(newValue);
   }
 
   @override
@@ -180,7 +178,9 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         if (widget.label != null && widget.labelVisible)
-          Text(widget.label!, style: widget.labelStyle ?? Theme.of(context).textTheme.subtitle1),
+          Text(widget.label!,
+              style:
+                  widget.labelStyle ?? Theme.of(context).textTheme.subtitle1),
         if (widget.label != null) SizedBox(height: 5),
         Column(
           mainAxisSize: MainAxisSize.min,
@@ -190,13 +190,13 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
               stream: _bloc.selected$,
               builder: (context, snapshot) {
                 List<T>? multipleSelectedValues;
-                if (isMultipleItems) multipleSelectedValues = (snapshot.data ?? <T>[]) as List<T>;
+                if (isMultipleItems)
+                  multipleSelectedValues = snapshot.data as List<T>?;
 
                 T? selectedValue;
                 if (!isMultipleItems) selectedValue = snapshot.data as T?;
 
                 return GestureDetector(
-                  key: ValueKey(selectedValue),
                   onTap: () {
                     SelectDialog.showModal<T>(
                       context,
@@ -234,51 +234,60 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                     );
                   },
                   child: widget.dropdownBuilder?.call(context, selectedValue) ??
-                      widget.dropdownMultipleItemsBuilder?.call(context, multipleSelectedValues ?? []) ??
-                      Builder(
-                        builder: (context) {
-                          String? title = isMultipleItems ? multipleSelectedValues?.join(", ").toString() : snapshot.data?.toString();
-                          bool showClearButton = snapshot.data != null && widget.showClearButton;
-                          return Container(
-                            padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4.0),
-                              border: Border.all(width: 1, color: Theme.of(context).dividerColor),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Expanded(child: Text(title ?? "", overflow: TextOverflow.ellipsis)),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Row(
-                                    children: <Widget>[
-                                      if (showClearButton)
-                                        GestureDetector(
-                                          onTap: () {
-                                            _bloc.selected$.add(null);
-                                            widget.onChanged?.call(null);
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 0),
-                                            child: const Icon(Icons.clear, size: 25, color: Colors.black54),
-                                          ),
+                      widget.dropdownMultipleItemsBuilder
+                          ?.call(context, multipleSelectedValues ?? []) ??
+                      Builder(builder: (context) {
+                        String? title = isMultipleItems
+                            ? multipleSelectedValues?.join(", ").toString()
+                            : snapshot.data?.toString();
+                        bool showClearButton =
+                            snapshot.data != null && widget.showClearButton;
+                        return Container(
+                          padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4.0),
+                            border: Border.all(
+                                width: 1,
+                                color: Theme.of(context).dividerColor),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(title ?? ""),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Row(
+                                  children: <Widget>[
+                                    if (showClearButton)
+                                      GestureDetector(
+                                        onTap: () {
+                                          _bloc.selected$.add(null);
+                                          widget.onChanged?.call(null);
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 0),
+                                          child: const Icon(Icons.clear,
+                                              size: 25, color: Colors.black54),
                                         ),
-                                      if (!showClearButton) const Icon(Icons.arrow_drop_down, size: 25, color: Colors.black54),
-                                    ],
-                                  ),
+                                      ),
+                                    if (!showClearButton)
+                                      const Icon(Icons.arrow_drop_down,
+                                          size: 25, color: Colors.black54),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                 );
               },
             ),
-            if (widget.validate != null || widget.validateMultipleItems != null) ValidationMessageWidget(bloc: _bloc),
+            if (widget.validate != null || widget.validateMultipleItems != null)
+              ValidationMessageWidget(bloc: _bloc),
           ],
         ),
       ],
